@@ -1,0 +1,25 @@
+name: Ruby
+
+# my_answerブランチへpushされた際に実行
+on:
+  push:
+    branches: 
+    - my_answer
+
+jobs:
+  run_spec:
+    name: Run spec
+
+    # 実行仮想マシンをubuntuに設定
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
+      with:
+        ruby-version: 2.7.2
+    - name: Run tests
+      run: |
+        bundle install
+        bundle exec rspec
